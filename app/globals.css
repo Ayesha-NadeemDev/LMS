@@ -1,26 +1,228 @@
-@import "tailwindcss";
+/* stylelint-disable unknown-at-rules */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html { font-family: 'Inter', system-ui, sans-serif; }
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-100
+           transition-colors duration-200 antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-xl border border-gray-200
+           dark:border-slate-700 shadow-sm;
+  }
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg
+           font-medium transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  .btn-secondary {
+    @apply bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600
+           text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg font-medium
+           transition-all duration-200;
+  }
+  .input {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-slate-600
+           bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           transition-all duration-200;
+  }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { @apply bg-gray-100 dark:bg-slate-800; }
+::-webkit-scrollbar-thumb { @apply bg-gray-300 dark:bg-slate-600 rounded-full; }
+/* Custom Scrollbar for Modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #6b7280;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+/* ========================================
+   DARK MODE FIX - FORCE ALL TEXT VISIBLE
+   ======================================== */
+
+/* Force all body text */
+.dark,
+.dark body {
+  color-scheme: dark !important;
+}
+
+/* Force all paragraph and span text */
+.dark p,
+.dark span,
+.dark li,
+.dark div:not(.bg-white):not(.bg-gray-100),
+.dark label,
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700,
+.dark .text-gray-800,
+.dark .text-sm,
+.dark .text-base,
+.dark .text-lg {
+  color: #e5e7eb !important;
+}
+
+/* Force all headings */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark .font-bold,
+.dark .font-semibold,
+.dark .font-medium {
+  color: #ffffff !important;
+}
+
+/* Force table text */
+.dark table,
+.dark td,
+.dark th,
+.dark tr {
+  color: #e5e7eb !important;
+}
+
+/* Force input and textarea text */
+.dark input,
+.dark textarea,
+.dark select {
+  color: #ffffff !important;
+  background-color: #374151 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Force modal text */
+.dark .fixed.bg-white,
+.dark .rounded-xl {
+  background-color: #1f2937 !important;
+}
+
+.dark .border,
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  border-color: #4b5563 !important;
+}
+
+/* Force all icons to be visible */
+.dark svg {
+  color: #d1d5db !important;
+}
+
+.dark svg.text-red-500,
+.dark svg.text-red-600 {
+  color: #ef4444 !important;
+}
+
+.dark svg.text-green-500,
+.dark svg.text-green-600 {
+  color: #10b981 !important;
+}
+
+.dark svg.text-indigo-500,
+.dark svg.text-indigo-600 {
+  color: #818cf8 !important;
+}
+
+/* Force table header background */
+.dark thead,
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important;
+}
+/* Force dark mode text colors for navbar */
+.dark .text-gray-700 {
+  color: #e5e7eb !important;
+}
+
+.dark .text-gray-800 {
+  color: #f3f4f6 !important;
+}
+
+.dark input::placeholder {
+  color: #6b7280 !important;
+}
+/* ========================================
+   BUTTON DARK MODE FIX
+   ======================================== */
+
+/* Force button text visibility */
+.dark button,
+.dark .btn {
+  color: #ffffff !important;
+}
+
+/* Primary buttons */
+.dark .bg-indigo-600,
+.dark button.bg-indigo-600,
+.dark .btn-primary {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+/* Secondary buttons */
+.dark .bg-gray-100,
+.dark button.bg-gray-100,
+.dark .bg-gray-50 {
+  background-color: #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+.dark .bg-gray-100:hover {
+  background-color: #334155 !important;
+}
+
+/* Outline buttons */
+.dark .border-gray-300,
+.dark button.border-gray-300 {
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Danger buttons (Delete) */
+.dark .bg-red-600,
+.dark button.bg-red-600 {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+/* Success buttons */
+.dark .bg-green-600,
+.dark button.bg-green-600 {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
 }
