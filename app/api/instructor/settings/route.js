@@ -3,6 +3,8 @@ import clientPromise from '@/lib/mongodb'
 import jwt from 'jsonwebtoken'
 import { ObjectId } from 'mongodb'
 
+export const dynamic = 'force-dynamic'
+
 // GET - Fetch all instructor settings
 export async function GET(request) {
   try {

@@ -3,6 +3,8 @@ import clientPromise from '@/lib/mongodb'
 import jwt from 'jsonwebtoken'
 import { ObjectId } from 'mongodb'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '')

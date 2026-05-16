@@ -23,11 +23,7 @@ const InstructorSettingsPage = () => {
   const [previewFontSize, setPreviewFontSize] = useState('medium');
 
   // Theme state
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('lms_theme');
-    if (savedTheme) return savedTheme;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  const [theme, setTheme] = useState('light');
 
   const [formData, setFormData] = useState({
     fullName: '', email: '', username: '', bio: '', title: '', location: '', website: '', phone: '',
@@ -62,6 +58,17 @@ const InstructorSettingsPage = () => {
     }
     localStorage.setItem('lms_theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Initialize theme from localStorage on client mount
+    const savedTheme = localStorage.getItem('lms_theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(isDark ? 'dark' : 'light');
+    }
+  }, []);
 
   useEffect(() => {
     fetchSettings();
